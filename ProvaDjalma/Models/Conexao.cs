@@ -6,9 +6,9 @@ using System.Web;
 
 namespace ProvaDjalma.Models
 {
-    public class Conexao
+    public class Conexao: IDisposable
     {
-        MySqlConnection conn;
+        public MySqlConnection conn;
         private readonly string _server = "127.0.0.1";
         private readonly string _port = "3306";
         private readonly string _database = "bd_provaDjalma";
