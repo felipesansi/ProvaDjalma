@@ -1,0 +1,55 @@
+﻿@model ProvaDjalma.Models.Vendedor
+
+
+
+<div class="row"
+<div class="col-8">
+    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+</div>
+
+  
+
+   <div class="col-4">
+    
+         @Html.LabelFor(model => model.Nome_usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+         @Html.EditorFor(model => model.Nome_usuario, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.Nome_usuario, "", new { @class = "text-danger" })
+     </div>
+            </div>
+
+<div class="row">
+    <div class="col-4">
+        @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+    </div>
+
+
+
+
+<div class="col-4">
+    @Html.LabelFor(model => model.Celular, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+</div>
+  </div>     
+
+
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

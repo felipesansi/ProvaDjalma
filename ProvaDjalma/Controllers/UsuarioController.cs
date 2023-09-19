@@ -32,7 +32,14 @@ namespace ProvaDjalma.Controllers
                                 Celular = Convert.ToString(leitura["celular"])
 
                             };
+                            list_vendedor.Add(vendedor);
+
+                            return RedirectToAction("Index");
+
                         }
+                    }else
+                    {
+                        ViewBag.Errologin = true;
                     }
                 }
             }
@@ -98,6 +105,39 @@ namespace ProvaDjalma.Controllers
                     return RedirectToAction("Index");
                 }
             }
+        }
+
+        public ActionResult Verificar_login(Vendedor vendedor)
+        {
+           
+            using(var conexao = new Conexao())
+            {
+                sql = "select * from vendedores where nome_usuario = @u and senha = @s and excluido = false";
+                using(var comando = new MySqlCommand())
+                {
+                    comando.Parameters.AddWithValue("@u", vendedor.Nome_usuario);
+                    comando.Parameters.AddWithValue("@s", vendedor.Senha);
+
+                    MySqlDataReader  leitura = comando.ExecuteReader();
+
+                    leitura.Read();
+                    if (leitura.HasRows)
+                    {
+                        return RedirectToAction("Menu", "Usuario");
+                    }
+                    else
+                    {
+                        RedirectToAction("Index", "Usuario");
+                    }
+                }
+            }
+            
+            
+            
+            
+            return View();
+
+
         }
 
             // GET: Usuario

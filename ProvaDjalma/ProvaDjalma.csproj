@@ -178,7 +178,6 @@
     </Compile>
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Conexao.cs" />
-    <Compile Include="Models\Fabricante.cs" />
     <Compile Include="Models\Marca.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Vendedor.cs" />
@@ -235,10 +234,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Usuario\_FrmUsuario.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Menu.cshtml" />
+    <Content Include="Views\Usuario\NovoVendedor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

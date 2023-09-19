@@ -8,6 +8,8 @@ namespace ProvaDjalma.Models
     public class Vendedor
     {
         public int Id{ get; set; }
+        public string Nome_usuario { get; set; }
+        public string Senha { get; set; }
         public string Nome { get; set; }
         public string Celular { get; set; }
         public bool Excluido { get; set; }
