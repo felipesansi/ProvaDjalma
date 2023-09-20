@@ -13,7 +13,7 @@ namespace ProvaDjalma.Controllers
         string sql = "";
 
 
-        public ActionResult Visualizar_vendedor() 
+        public ActionResult Index() 
         {
             using (var conexao_bd = new Conexao()) 
             {
@@ -33,17 +33,18 @@ namespace ProvaDjalma.Controllers
 
                             };
                             list_vendedor.Add(vendedor);
-
-                            return RedirectToAction("Index");
-
                         }
-                    }else
+                      
+                        return View(list_vendedor);
+                    }
+                    else
                     {
                         ViewBag.Errologin = true;
+                        return RedirectToAction("Index");
                     }
                 }
             }
-            return View();  
+            
         }
         public ActionResult Salvar_vendedor(Vendedor vendedor)
         {
@@ -126,8 +127,8 @@ namespace ProvaDjalma.Controllers
                         return RedirectToAction("Menu", "Usuario");
                     }
                     else
-                    {
-                        RedirectToAction("Index", "Usuario");
+                    { ViewBag.ErroLogin = true;
+                         return RedirectToAction("Index", "Usuario");
                     }
                 }
             }
@@ -135,15 +136,12 @@ namespace ProvaDjalma.Controllers
             
             
             
-            return View();
+            
 
 
         }
 
-            // GET: Usuario
-            public ActionResult Index()
-            {
-                return View();
+           
             }
         }
-    } 
+   

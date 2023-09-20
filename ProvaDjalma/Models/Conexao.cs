@@ -13,7 +13,7 @@ namespace ProvaDjalma.Models
         private readonly string _port = "3306";
         private readonly string _database = "bd_provaDjalma";
         private readonly string _uid = "root";
-        private readonly string _pwd = "felipe";
+        private readonly string _pwd = "felipe123";
 
         public Conexao() 
         {
@@ -23,10 +23,10 @@ namespace ProvaDjalma.Models
         private void conectar()
         {
             string conexao = "Server=" + _server;
-              conexao += "Port=" + _port;
-             conexao += "Database=" + _database;
-            conexao += "Uid=" + _uid;
-            conexao += "Pwd=" + _pwd;
+              conexao += "; Port=" + _port;
+             conexao += "; Database=" + _database;
+            conexao += "; Uid=" + _uid;
+            conexao += "; Pwd=" + _pwd;
 
             conn = new MySqlConnection(conexao);
 
