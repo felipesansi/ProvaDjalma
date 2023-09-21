@@ -46,7 +46,7 @@ namespace ProvaDjalma.Controllers
             }
             
         }
-        public ActionResult Salvar_vendedor(Vendedor vendedor)
+        public ActionResult SalvarVendedor(Vendedor vendedor)
         {
 
 
@@ -68,6 +68,46 @@ namespace ProvaDjalma.Controllers
 
 
 
+        }
+        public ActionResult edit (int id)
+        {
+
+            using (var conexao_bd = new Conexao())
+            {
+                sql = "select * from tb_vendedores where id = @id";
+
+                using (var comando = new MySqlCommand(sql, conexao_bd.conn))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+
+                    MySqlDataReader leitura = comando.ExecuteReader();
+                    leitura.Read();
+                    if (leitura.HasRows)
+                    {
+                        var vendedor = new Vendedor
+                        {
+                            Nome = Convert.ToString(leitura["nome"]),
+                            Nome_usuario = Convert.ToString(leitura["nome_usuario"]),
+                            Senha = Convert.ToString(leitura["senha"]),
+                            Celular= Convert.ToString(leitura["celular"])
+                        };
+                        return View(vendedor);
+                    }
+                    else
+                    {
+                        ViewBag.ErroLogin = true;
+                        return RedirectToAction("Index");
+                    }
+
+                }
+            }
+
+        }
+
+
+        public ActionResult NovoVendedor()
+        {
+            return View();
         }
 
         public ActionResult Atualizar_vendedor(Vendedor vendedor)
@@ -124,11 +164,11 @@ namespace ProvaDjalma.Controllers
                     leitura.Read();
                     if (leitura.HasRows)
                     {
-                        return RedirectToAction("Menu", "Usuario");
+                        return RedirectToAction("Menu");
                     }
                     else
                     { ViewBag.ErroLogin = true;
-                         return RedirectToAction("Index", "Usuario");
+                         return RedirectToAction("Index");
                     }
                 }
             }
