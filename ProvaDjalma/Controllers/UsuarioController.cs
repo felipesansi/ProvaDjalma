@@ -52,12 +52,18 @@ namespace ProvaDjalma.Controllers
 
             using (var conexao_bd = new Conexao())
             {
-                sql = "insert into tb_vendedores (nome,celular,excluido) values(@n,@c,@e) ";
+                sql = "insert into tb_vendedores (nome,nome_usuario, senha, celular,excluido) values(@n,@u,@s,@c,@e) ";
 
                 using (var comando = new MySqlCommand(sql, conexao_bd.conn))
                 {
                     comando.Parameters.AddWithValue("@n", vendedor.Nome);
+
+                    comando.Parameters.AddWithValue("@u", vendedor.Nome_usuario);
+
+                    comando.Parameters.AddWithValue("@s", vendedor.Senha);
+
                     comando.Parameters.AddWithValue("@c", vendedor.Celular);
+
                     comando.Parameters.AddWithValue("@e", vendedor.Excluido);
                     comando.ExecuteNonQuery();
 
@@ -65,6 +71,46 @@ namespace ProvaDjalma.Controllers
 
                 }
             }
+
+
+
+        }
+
+        public ActionResult Visualizar(int id)
+        {
+
+            using(var conexao = new Conexao())
+            {
+                sql = "select * from tb_vendedores where id = @id and excluido = false";
+
+                using(var comando = new MySqlCommand())
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+
+
+                    MySqlDataReader Leitura = comando.ExecuteReader();
+                    Leitura.Read();
+                    if (Leitura.HasRows)
+                    {
+                        var vendedor = new Vendedor
+                        {
+                            Nome = Convert.ToString(Leitura["nome"]),
+                            Nome_usuario  = Convert.ToString(Leitura["nome_usuario"]),
+                            Senha = Convert.ToString(Leitura["senha"]),
+                            Celular = Convert.ToString(Leitura["celular"]),
+
+                        };
+                        return View(vendedor);
+                    }
+                    else
+                    {
+                        ViewBag.ErroLogin = true;
+                        return RedirectToAction("Ixdex");
+                    }
+                }
+
+            }
+         
 
 
 
@@ -115,11 +161,17 @@ namespace ProvaDjalma.Controllers
 
             using (var conexao_bd = new Conexao())
             {
-                sql = "update tb_vendedores set nome = @n, celular = @c, excluido = false where id = @id ";
+                sql = "update tb_vendedores set nome = @n, nome_usuario = @u, senha = @s, celular = @c, excluido = false where id = @id ";
                 using (var comando = new MySqlCommand(sql, conexao_bd.conn))
                 {
                     comando.Parameters.AddWithValue("@id", vendedor.Id);
+                    
                     comando.Parameters.AddWithValue("@n", vendedor.Nome);
+                    
+                    comando.Parameters.AddWithValue("@u", vendedor.Nome_usuario);
+
+                    comando.Parameters.AddWithValue("@s", vendedor.Senha);
+                    
                     comando.Parameters.AddWithValue("@c", vendedor.Celular);
                     comando.Parameters.AddWithValue("@e", vendedor.Excluido);
                     comando.ExecuteNonQuery();
